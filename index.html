@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Максим Колосков — разработка, автоматизация, данные, управление проектами. Junior из Санкт-Петербурга.">
+<title>Максим Колосков — разработка и автоматизация</title>
+</head>
+<body>
+
+<style>
+  :root{
+    --paper:#f1ead9; --paper-2:#e6dbc3; --panel:#f8f2e6;
+    --ink:#17120f; --muted:#5e564a; --faint:#9a8e7a;
+    --bold:#b12a3a; --bold-2:#8a1f2c; --on-bold:#f5ecd9; --on-bold-dim:#e3b6ad;
+    --line:rgba(23,18,15,.16); --line-2:rgba(23,18,15,.08);
+    --sans:"Helvetica Neue",Helvetica,Arial,system-ui,-apple-system,sans-serif;
+    --serif:"Didot","Bodoni 72","Hoefler Text","Playfair Display",Georgia,"Times New Roman",serif;
+    --mono:ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.55;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+
+  .grain{position:fixed;inset:0;z-index:9994;pointer-events:none;opacity:.04;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+  #intro{position:fixed;inset:0;z-index:9995;background:var(--paper);display:flex;align-items:center;justify-content:center;
+    transition:transform .95s cubic-bezier(.76,0,.24,1)}
+  #intro.lift{transform:translateY(-101%)}
+  .intro-word{font-family:var(--sans);font-weight:800;font-size:clamp(2.6rem,11vw,8rem);letter-spacing:-.04em;color:var(--ink);
+    clip-path:inset(0 100% 0 0);transition:clip-path .95s cubic-bezier(.76,0,.24,1) .16s}
+  #intro.reveal .intro-word{clip-path:inset(0 0 0 0)}
+  .intro-word .b{color:var(--bold)}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,64px)}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;justify-content:space-between;
+    padding:18px clamp(20px,5vw,64px);font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);background:linear-gradient(to bottom,rgba(241,234,217,.9),rgba(241,234,217,0))}
+  nav .mono-mark{color:var(--ink);letter-spacing:.24em;font-weight:700}
+  nav a{color:var(--ink);text-decoration:none;transition:color .25s}
+  nav a:hover{color:var(--bold)}
+
+  header.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:96px 0 40px;position:relative}
+  .eyebrow{font-family:var(--mono);font-size:clamp(10px,1.4vw,12.5px);letter-spacing:.34em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:clamp(20px,4vw,34px)}
+  .eyebrow b{color:var(--bold);font-weight:700}
+  .tilt{transform-style:preserve-3d;transition:transform .4s cubic-bezier(.2,.7,.2,1);will-change:transform}
+  h1{font-family:var(--sans);font-weight:800;font-size:clamp(3.6rem,17vw,14rem);line-height:.84;letter-spacing:-.045em;margin:0;text-wrap:balance}
+  h1 .l2{-webkit-text-stroke:2px var(--ink);color:transparent;transition:color .8s cubic-bezier(.4,0,.2,1),-webkit-text-stroke-color .8s cubic-bezier(.4,0,.2,1)}
+  header.hero:hover h1 .l2{color:var(--ink)}
+  .reveal-line{display:block;overflow:hidden}
+  .reveal-line>span{display:block;transform:translateY(105%);transition:transform 1s cubic-bezier(.16,1,.3,1)}
+  .go .reveal-line>span{transform:none}
+  .lead{font-family:var(--serif);font-style:italic;font-size:clamp(1.4rem,3.6vw,2.7rem);line-height:1.22;
+    max-width:20ch;margin:clamp(28px,5vw,48px) 0 0;color:var(--ink)}
+  .lead em{color:var(--bold);font-style:italic}
+  .sub{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--muted);max-width:52ch;margin:20px 0 0;line-height:1.6}
+  .meta{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:clamp(26px,5vw,40px);font-family:var(--mono);font-size:12px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .meta span{display:inline-flex;align-items:center;gap:22px}
+  .dot{width:5px;height:5px;border-radius:50%;background:var(--bold);display:inline-block}
+  .scroll-cue{position:absolute;left:0;bottom:24px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:10px}
+  .scroll-cue .bar{width:34px;height:1px;background:var(--faint);position:relative;overflow:hidden}
+  .scroll-cue .bar::after{content:"";position:absolute;inset:0;background:var(--bold);transform:translateX(-100%);animation:sweep 2.6s ease-in-out infinite}
+  @keyframes sweep{0%{transform:translateX(-100%)}50%{transform:translateX(0)}100%{transform:translateX(100%)}}
+
+  .marquee{overflow:hidden;background:var(--bold);color:var(--on-bold);position:relative;z-index:9994;isolation:isolate}
+  .track{display:inline-flex;align-items:center;white-space:nowrap;padding:16px 0;font-family:var(--sans);font-weight:800;
+    font-size:clamp(1.2rem,3vw,2rem);letter-spacing:-.01em;animation:scroll 34s linear infinite;will-change:transform;backface-visibility:hidden}
+  .track span{padding:0 26px;display:inline-flex;align-items:center;gap:26px}
+  .track i{width:8px;height:8px;border-radius:50%;background:var(--on-bold);display:inline-block;font-style:normal;opacity:.7}
+  @keyframes scroll{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+
+  .cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:clamp(28px,4vw,40px)}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--sans);font-weight:700;font-size:1rem;letter-spacing:-.01em;
+    padding:15px 26px;border-radius:999px;text-decoration:none;transition:transform .25s cubic-bezier(.2,.7,.2,1),background .25s,color .25s,border-color .25s;will-change:transform}
+  .btn-solid{background:var(--bold);color:var(--on-bold);border:1px solid var(--bold)}
+  .btn-solid:hover{background:var(--bold-2);border-color:var(--bold-2)}
+  .btn-solid span{transition:transform .25s}
+  .btn-solid:hover span{transform:translateY(3px)}
+  .btn-ghost span{transition:transform .25s}
+  .btn-ghost:hover span{transform:translateY(3px)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+  .btn-ghost:hover{background:var(--ink);color:var(--paper)}
+
+  .stats{padding:clamp(40px,6vw,66px) 0;border-bottom:1px solid var(--line)}
+  .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:clamp(22px,4vw,44px)}
+  .stat{border-top:3px solid var(--bold);padding-top:16px}
+  .stat .n{font-weight:800;font-size:clamp(2.4rem,6vw,4.3rem);letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+  .stat .n span{color:var(--bold)}
+  .stat .l{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-top:12px}
+
+  section{padding:clamp(72px,11vw,150px) 0;position:relative}
+  .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:clamp(40px,6vw,72px);border-top:2px solid var(--ink);padding-top:26px}
+  .sec-idx{font-family:var(--mono);font-size:13px;letter-spacing:.2em;color:var(--bold);font-weight:700}
+  .sec-title{font-family:var(--sans);font-weight:800;font-size:clamp(1.6rem,4.4vw,3rem);letter-spacing:-.02em;margin:0;line-height:1}
+
+  .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+  .skill{background:var(--paper);padding:clamp(24px,3vw,34px);transition:background .3s,color .3s}
+  .skill:hover{background:var(--ink);color:var(--paper)}
+  .skill .k{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--bold);margin-bottom:14px}
+  .skill:hover .k{color:var(--on-bold-dim)}
+  .skill h3{font-weight:700;font-size:1.18rem;margin:0 0 10px;letter-spacing:-.01em}
+  .skill p{margin:0;color:var(--muted);font-size:.97rem;line-height:1.55;max-width:38ch}
+  .skill:hover p{color:var(--paper-2)}
+  .skills-note{font-family:var(--serif);font-style:italic;font-size:clamp(1.3rem,3vw,2rem);line-height:1.3;color:var(--ink);max-width:24ch;margin:clamp(38px,6vw,64px) 0 0}
+  .skills-note em{color:var(--bold)}
+
+  .works{display:flex;flex-direction:column}
+  .work{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,2fr);gap:clamp(14px,3vw,48px);align-items:start;
+    padding:clamp(26px,3.4vw,40px) 0;border-top:1px solid var(--line);text-decoration:none;color:inherit;transition:padding-left .4s ease}
+  .work:last-child{border-bottom:1px solid var(--line)}
+  .work:hover{padding-left:16px}
+  .work .wname{font-weight:800;font-size:clamp(1.5rem,3.6vw,2.4rem);letter-spacing:-.02em;line-height:1;display:flex;align-items:center;gap:.5ch;transition:color .25s}
+  .work:hover .wname{color:var(--bold)}
+  .arrow{color:var(--faint);transition:transform .4s,color .4s}
+  .work:hover .arrow{transform:translate(6px,-6px);color:var(--bold)}
+  .wbody p{margin:0 0 16px;color:var(--muted);font-size:1.03rem;line-height:1.55;max-width:48ch}
+  .tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--muted);border:1px solid var(--line);padding:4px 10px;border-radius:999px}
+  .soon{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--bold);margin-top:14px}
+
+  .about{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(30px,5vw,64px);align-items:start}
+  .about p{margin:0 0 18px;color:var(--muted);font-size:1.06rem;line-height:1.66;max-width:52ch}
+  .about p strong{color:var(--ink);font-weight:700}
+  .quote{font-family:var(--serif);font-style:italic;font-size:clamp(1.6rem,4vw,2.7rem);line-height:1.26;color:var(--ink);margin:0;border-left:3px solid var(--bold);padding-left:24px}
+  .quote .attr{display:block;font-family:var(--mono);font-style:normal;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--bold);margin-top:22px}
+
+  #contact{background:var(--bold);color:var(--on-bold);
+    clip-path:polygon(0 clamp(30px,5vw,84px),100% 0,100% 100%,0 100%);padding-top:clamp(104px,14vw,190px)}
+  #contact .sec-head{border-top-color:var(--on-bold)}
+  #contact .sec-idx{color:var(--on-bold)}
+  #contact .sec-title{color:var(--on-bold)}
+  .c-big{font-weight:800;font-size:clamp(2.1rem,8vw,5.6rem);letter-spacing:-.03em;line-height:1;margin:0 0 clamp(34px,5vw,54px);text-wrap:balance;color:var(--on-bold)}
+  .c-big em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--paper)}
+  .c-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:rgba(245,236,217,.18);border:1px solid rgba(245,236,217,.18)}
+  .c-list a{background:var(--bold);padding:clamp(20px,2.6vw,28px);text-decoration:none;color:var(--on-bold);display:flex;flex-direction:column;gap:8px;transition:background .3s,color .3s}
+  .c-list a:hover{background:var(--on-bold);color:var(--bold-2)}
+  .c-list .k{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--on-bold-dim)}
+  .c-list a:hover .k{color:var(--bold)}
+  .c-list .v{font-size:1.12rem;font-weight:700;letter-spacing:-.01em}
+
+  footer{border-top:1px solid var(--line);padding:32px 0 60px;display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+  .rise{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+  .rise.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .rise{opacity:1;transform:none;transition:none}
+    .reveal-line>span{transform:none}
+    .track{animation:none}
+    .scroll-cue .bar::after{animation:none}
+    .tilt{transition:none}
+    #intro{display:none}
+  }
+  :focus-visible{outline:2px solid var(--bold);outline-offset:3px}
+  @media (max-width:640px){ .work{grid-template-columns:1fr;gap:14px} .meta span{gap:14px} }
+</style>
+
+<div class="grain" aria-hidden="true"></div>
+<div id="intro" aria-hidden="true"><div class="intro-word">М<span class="b">К</span></div></div>
+
+<nav>
+  <span class="mono-mark">МК</span>
+  <span><a class="magnet" href="#contact">Связаться →</a></span>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">ВЕБ · АВТОМАТИЗАЦИЯ · ДАННЫЕ · MACOS · <b>САНКТ-ПЕТЕРБУРГ</b></div>
+    <div class="tilt">
+      <h1>
+        <span class="reveal-line"><span>Максим</span></span>
+        <span class="reveal-line"><span class="l2">Колосков</span></span>
+      </h1>
+    </div>
+    <p class="lead reveal-line"><span>Делаю сайты, ботов и инструменты — <em>под самые разные задачи</em>.</span></p>
+    <p class="sub">Веб на FastAPI, телеграм-боты, скрапинг и разбор данных, немного нативного macOS. Junior из Питера, ищу удалёнку по России.</p>
+    <div class="meta">
+      <span><i class="dot"></i>junior · удалёнка · РФ</span>
+      <span><i class="dot"></i>самоучка-практик</span>
+      <span><i class="dot"></i>что сделал — то работает</span>
+    </div>
+    <div class="cta">
+      <a class="btn btn-solid magnet" href="resume.pdf" download="Колосков Максим — резюме.pdf">Скачать резюме</a>
+      <a class="btn btn-ghost magnet" href="#contact">Связаться <span>↓</span></a>
+      <a class="btn btn-ghost magnet" href="https://github.com/bogemadumb" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+  <div class="scroll-cue"><span class="bar"></span>вниз</div>
+</header>
+
+<div class="marquee" aria-hidden="true"><div class="track" id="track"></div></div>
+
+<section class="stats" aria-label="Коротко о деле">
+  <div class="wrap stats-grid">
+    <div class="stat rise"><div class="n">13</div><div class="l">проектов на&nbsp;GitHub</div></div>
+    <div class="stat rise"><div class="n">50<span>+</span></div><div class="l">студентов и&nbsp;заказчиков</div></div>
+    <div class="stat rise"><div class="n">2022</div><div class="l">пишу код с</div></div>
+    <div class="stat rise"><div class="n">24/7</div><div class="l">работает без&nbsp;меня</div></div>
+  </div>
+</section>
+
+<main>
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head rise"><span class="sec-idx">01</span><h2 class="sec-title">Что делаю</h2></div>
+      <div class="skills rise">
+        <div class="skill"><div class="k">веб</div><h3>Веб-сервисы и API</h3><p>Бэкенд на FastAPI, REST-API, немного TypeScript — от формы до небольшого сервиса целиком.</p></div>
+        <div class="skill"><div class="k">фронт</div><h3>Сайты и вёрстка</h3><p>Вёрстка на HTML и CSS с адаптивом — чтобы страница выглядела нормально и на десктопе, и на телефоне.</p></div>
+        <div class="skill"><div class="k">веб-дизайн</div><h3>Веб-дизайн</h3><p>Сам собираю макет: сетка, типографика, акценты — люблю, когда выглядит хорошо, а не три буллета на градиенте.</p></div>
+        <div class="skill"><div class="k">базы данных</div><h3>Хранение данных</h3><p>От Google-таблицы как базы до SQL — продумать схему и запросы, чтобы данные не терялись.</p></div>
+        <div class="skill"><div class="k">автоматизация</div><h3>Боты и фоновые задачи</h3><p>Телеграм-боты, скрапинг, сервисы по расписанию на своём VPS — работают без меня через cron и systemd.</p></div>
+        <div class="skill"><div class="k">парсинг</div><h3>Сбор и разбор данных</h3><p>Собрать из разных источников, распарсить, почистить и честно типизировать, чтобы даты и номера не поехали.</p></div>
+        <div class="skill"><div class="k">macos</div><h3>Нативные приложения</h3><p>Менюбар-приложение под мак на Swift — то, что живёт прямо в строке меню и не мозолит глаза.</p></div>
+        <div class="skill"><div class="k">документы</div><h3>Презентации и документы</h3><p>Презентации и сборка документов по ГОСТу — с нормальным содержанием и настоящими номерами страниц.</p></div>
+        <div class="skill"><div class="k">видео</div><h3>Монтаж и разбор</h3><p>Нарезка, склейка и субтитры через ffmpeg, разбор содержания — локальными моделями.</p></div>
+        <div class="skill"><div class="k">ии</div><h3>LLM под задачу</h3><p>LLM-пайплайны и мульти-агент беру там, где реально к месту, а не ради моды.</p></div>
+        <div class="skill"><div class="k">инфраструктура</div><h3>VPS и деплой</h3><p>Свой сервер: демоны, автозапуск, бэкапы — всё поднимается само и переживает перезагрузку.</p></div>
+        <div class="skill"><div class="k">интеграции</div><h3>API-интеграции</h3><p>Связать сервисы между собой — Telegram Bot API, Google Sheets, почта — чтобы данные ходили сами.</p></div>
+        <div class="skill"><div class="k">проекты</div><h3>Управление проектами</h3><p>Полный цикл: декомпозиция, WBS, Гантт, RACI, риски, стейкхолдеры. Agile, Kanban, Waterfall — под задачу.</p></div>
+        <div class="skill"><div class="k">финмодели</div><h3>Финмоделирование</h3><p>P&amp;L, unit-экономика, точка безубыточности, CAC/LTV, сценарии — считаю экономику проекта в Excel.</p></div>
+        <div class="skill"><div class="k">аналитика</div><h3>Бизнес-аналитика</h3><p>SWOT, PESTEL, 5 сил Портера, многокритериальный выбор (AHP, SAW, TOPSIS), анализ чувствительности.</p></div>
+        <div class="skill"><div class="k">закупки</div><h3>Управление закупками</h3><p>Make-or-buy, ABC/XYZ, оценка поставщиков, прогноз потребности, 223/44-ФЗ.</p></div>
+      </div>
+      <p class="skills-note rise">Не держусь за один стек — <em>в новое погружаюсь быстро</em>, когда есть понятная задача.</p>
+    </div>
+  </section>
+
+  <section id="works">
+    <div class="wrap">
+      <div class="sec-head rise"><span class="sec-idx">02</span><h2 class="sec-title">Основные работы</h2></div>
+      <div class="works rise">
+        <a class="work" href="https://github.com/bogemadumb/tablegrab" target="_blank" rel="noopener">
+          <div class="wname">TableGrab <span class="arrow">↗</span></div>
+          <div class="wbody">
+            <p>Берёт таблицу с любой веб-страницы и кладёт в Excel, CSV или Google Sheets одним кликом. Расширение под Chrome на MV3 и веб-сервис на FastAPI делят общий движок разбора. Типизация честная — даты, ID и номера не портятся при переносе.</p>
+            <div class="tags"><span class="tag">Chrome MV3</span><span class="tag">FastAPI</span><span class="tag">Python</span><span class="tag">парсинг данных</span></div>
+          </div>
+        </a>
+        <a class="work" href="https://github.com/bogemadumb/ccmonitor" target="_blank" rel="noopener">
+          <div class="wname">ccmonitor <span class="arrow">↗</span></div>
+          <div class="wbody">
+            <p>Менюбар-приложение под macOS: лимиты и расход видно прямо в строке меню. Интерфейс на Swift, данные тянет Python, само поднимается через LaunchAgent.</p>
+            <div class="tags"><span class="tag">Swift</span><span class="tag">macOS</span><span class="tag">Python</span><span class="tag">LaunchAgent</span></div>
+          </div>
+        </a>
+        <a class="work" href="https://github.com/bogemadumb/habit-tracker" target="_blank" rel="noopener">
+          <div class="wname">habit-tracker <span class="arrow">↗</span></div>
+          <div class="wbody">
+            <p>Свой трекер привычек: Telegram Mini App на FastAPI, а базой служит обычная Google-таблица. Стрики, календарь-хитмэп, напоминания — отмечаешься и видишь прогресс, не выходя из телеги.</p>
+            <div class="tags"><span class="tag">FastAPI</span><span class="tag">Telegram Mini App</span><span class="tag">TypeScript</span><span class="tag">Google Sheets API</span></div>
+          </div>
+        </a>
+        <a class="work" href="https://github.com/bogemadumb/news-digest" target="_blank" rel="noopener">
+          <div class="wname">news-digest <span class="arrow">↗</span></div>
+          <div class="wbody">
+            <p>Новостной бот: около 140 RSS-источников схлопываются в один дайджест без дублей и рекламы. Кластеризация ловит один и тот же сюжет, LLM-редактор причёсывает, рассылка идёт по расписанию.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">LLM</span><span class="tag">RSS</span><span class="tag">systemd</span><span class="tag">Telegram</span></div>
+          </div>
+        </a>
+        <a class="work" href="https://github.com/bogemadumb/moodle-monitor" target="_blank" rel="noopener">
+          <div class="wname">moodle-monitor <span class="arrow">↗</span></div>
+          <div class="wbody">
+            <p>Мониторит учебный портал Moodle: заходит через SSO, сравнивает снапшоты и пушит новые задания в Telegram. Заодно сам раскладывает скачанные файлы по папкам.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">скрапинг</span><span class="tag">SSO</span><span class="tag">cron</span></div>
+          </div>
+        </a>
+        <a class="work" href="https://github.com/bogemadumb/gmail-telegram-bot" target="_blank" rel="noopener">
+          <div class="wname">gmail-telegram-bot <span class="arrow">↗</span></div>
+          <div class="wbody">
+            <p>Двусторонний мост между Gmail и Telegram: письма падают прямо в чат, а ответить, архивировать или отписаться можно оттуда же. Коды и ссылки из писем достаются регулярками, мимо модели.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">IMAP/SMTP</span><span class="tag">Telegram</span></div>
+          </div>
+        </a>
+        <a class="work" href="https://github.com/bogemadumb/tg-style-autoresponder" target="_blank" rel="noopener">
+          <div class="wname">tg-style-autoresponder <span class="arrow">↗</span></div>
+          <div class="wbody">
+            <p>Бот, который отвечает в личке твоим же стилем через Telegram Business API. Сам решает, где ответить, а где спросить тебя, и подтягивает твои же правки.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Telegram Business API</span><span class="tag">LLM</span></div>
+          </div>
+        </a>
+        <a class="work" href="https://github.com/bogemadumb/presentation-designer" target="_blank" rel="noopener">
+          <div class="wname">presentation-designer <span class="arrow">↗</span></div>
+          <div class="wbody">
+            <p>Делаю презентации кодом: из брифа собирается компоновка слайдов, на выходе PDF или редактируемый .pptx. Не шаблон из готовых макетов, а свой дизайн под тему.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">HTML/CSS</span><span class="tag">pptx</span><span class="tag">дизайн</span></div>
+          </div>
+        </a>
+        <a class="work" href="https://github.com/bogemadumb/gost-docx" target="_blank" rel="noopener">
+          <div class="wname">gost-docx <span class="arrow">↗</span></div>
+          <div class="wbody">
+            <p>Движок, который собирает документ из Markdown в docx или pdf по ГОСТу. Сам делает содержание и проставляет реальные номера страниц, а не заглушки.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">docx</span><span class="tag">pdf</span><span class="tag">ГОСТ</span></div>
+          </div>
+        </a>
+        <a class="work" href="https://github.com/bogemadumb/ru-stats" target="_blank" rel="noopener">
+          <div class="wname">ru-stats <span class="arrow">↗</span></div>
+          <div class="wbody">
+            <p>Тащит госстатистику — Росстат, ЕМИСС, ЦБ — и отдаёт готовой таблицей со ссылкой на источник. Удобно для учебных и аналитических работ.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">госстатистика</span><span class="tag">данные</span></div>
+          </div>
+        </a>
+        <a class="work" href="https://github.com/bogemadumb/sphere-analysis" target="_blank" rel="noopener">
+          <div class="wname">sphere-analysis <span class="arrow">↗</span></div>
+          <div class="wbody">
+            <p>Разбор ниши или бизнес-идеи панелью из шести ролей — практик, финансист, скептик и другие. На выходе честная структура и минусы, а не хвалебный текст.</p>
+            <div class="tags"><span class="tag">LLM</span><span class="tag">мульти-агент</span><span class="tag">аналитика</span></div>
+          </div>
+        </a>
+        <a class="work" href="https://github.com/bogemadumb/video-vision" target="_blank" rel="noopener">
+          <div class="wname">video-vision <span class="arrow">↗</span></div>
+          <div class="wbody">
+            <p>«Зрение» по видео: кадры через ffmpeg плюс локальная транскрипция — можно понять, что происходит в ролике, без ручного пересмотра. Всё локально, без облака.</p>
+            <div class="tags"><span class="tag">ffmpeg</span><span class="tag">whisper</span><span class="tag">локально</span></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head rise"><span class="sec-idx">03</span><h2 class="sec-title">О себе</h2></div>
+      <div class="about">
+        <div class="rise">
+          <p>В код пришёл не с курсов. В какой-то момент надоело делать одно и то же руками — оказалось, проще написать скрипт. Так и втянулся: сначала боты и парсеры, потом сайты и веб-приложения — с вёрсткой, базами данных и дизайном, — а там добрался и до нативного приложения под мак.</p>
+          <p>Делаю штуки под свои задачи — и они реально работают, а не пылятся в репозитории. Одно следит за учёбой, другое схлопывает новости в дайджест, третье держит мои привычки. Что подвернётся новое — разбираюсь и делаю.</p>
+          <p>Второй трек — менеджмент. Учусь на менеджера проектов в СПбГЭУ и с 2023-го веду проектный консалтинг: бизнес-планы, финмодели, аналитика, проектные и учебные работы — больше пятидесяти студентов и заказчиков, часто с повторными обращениями. Запускал образовательное Telegram-медиа и довёл его с нуля до 1500 подписчиков. <strong>Это про надёжность и умение разобраться в чужой теме с нуля.</strong></p>
+        </div>
+        <div class="rise">
+          <p class="quote">«Хорошо сделано — это когда работает само и к нему не приходится возвращаться.»<span class="attr">— Максим Колосков</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="sec-head rise"><span class="sec-idx">04</span><h2 class="sec-title">Связаться</h2></div>
+      <h3 class="c-big rise">Нужен сайт, бот, разбор данных, дизайн — <em>или что-то совсем другое</em>? Разберусь и сделаю.</h3>
+      <div class="c-list rise">
+        <a href="https://t.me/bogema_dumb" target="_blank" rel="noopener"><span class="k">Telegram</span><span class="v">@bogema_dumb</span></a>
+        <a href="mailto:milistane@gmail.com"><span class="k">Почта</span><span class="v">milistane@gmail.com</span></a>
+        <a href="https://github.com/bogemadumb" target="_blank" rel="noopener"><span class="k">GitHub</span><span class="v">github.com/bogemadumb</span></a>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <footer>
+      <span>Максим Колосков · Санкт-Петербург</span>
+      <span>@bogema_dumb · milistane@gmail.com · github.com/bogemadumb</span>
+    </footer>
+  </div>
+</main>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = matchMedia('(pointer:fine)').matches;
+
+  /* плавный скролл по внутренним якорям: в артефакт-айфрейме hash-переход перезагружает документ и повторяет интро */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var id=a.getAttribute('href'); if(id.length<2) return;
+      var t=document.querySelector(id); if(!t) return;
+      e.preventDefault();
+      document.querySelectorAll('.rise').forEach(function(el){el.classList.add('in');});
+      t.scrollIntoView({behavior: reduce?'auto':'smooth', block:'start'});
+    });
+  });
+
+  /* marquee */
+  (function(){
+    var items=["FASTAPI","PYTHON","JS / TYPESCRIPT","HTML / CSS","ВЁРСТКА","ВЕБ-ДИЗАЙН","ТЕЛЕГРАМ-БОТЫ","СКРАПИНГ","БАЗЫ ДАННЫХ · SQL","SWIFT / MACOS","УПРАВЛЕНИЕ ПРОЕКТАМИ","ФИНМОДЕЛИ","АНАЛИТИКА","EXCEL","ПРЕЗЕНТАЦИИ","LLM"];
+    var block='<span>'+items.join('&nbsp;&nbsp;&nbsp;<i></i>&nbsp;&nbsp;&nbsp;')+'&nbsp;&nbsp;&nbsp;<i></i>&nbsp;&nbsp;&nbsp;</span>';
+    document.getElementById('track').innerHTML=block+block;
+  })();
+
+  /* reactive tilt on hero name */
+  var tilt=document.querySelector('.tilt');
+  if(tilt && fine && !reduce){
+    var trx=0,try_=0,rx=0,ry=0;
+    window.addEventListener('mousemove',function(e){
+      trx=(e.clientY/innerHeight-0.5)*-6; try_=(e.clientX/innerWidth-0.5)*9;
+    });
+    (function spin(){ rx+=(trx-rx)*0.08; ry+=(try_-ry)*0.08;
+      tilt.style.transform='perspective(1100px) rotateX('+rx.toFixed(2)+'deg) rotateY('+ry.toFixed(2)+'deg)';
+      requestAnimationFrame(spin); })();
+  }
+
+  /* intro + hero reveal */
+  var hero=document.querySelector('.hero'), introEl=document.getElementById('intro');
+  function go(){ hero.classList.add('go'); }
+  if(reduce){ go(); if(introEl) introEl.remove(); }
+  else{
+    setTimeout(function(){ introEl.classList.add('reveal'); },200);
+    setTimeout(function(){ introEl.classList.add('lift'); go(); },1150);
+    setTimeout(function(){ if(introEl&&introEl.parentNode) introEl.remove(); },2150);
+  }
+
+  /* scroll reveals */
+  var risers=document.querySelectorAll('.rise');
+  if(reduce||!('IntersectionObserver' in window)){ risers.forEach(function(el){el.classList.add('in');}); }
+  else{
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.15,rootMargin:'0px 0px -8% 0px'});
+    risers.forEach(function(el){io.observe(el);});
+  }
+
+  /* magnetic buttons/links */
+  if(fine && !reduce){
+    document.querySelectorAll('.magnet').forEach(function(el){
+      el.addEventListener('mousemove',function(e){
+        var r=el.getBoundingClientRect();
+        el.style.transform='translate('+((e.clientX-(r.left+r.width/2))*0.22).toFixed(1)+'px,'+((e.clientY-(r.top+r.height/2))*0.35).toFixed(1)+'px)';
+      });
+      el.addEventListener('mouseleave',function(){ el.style.transform=''; });
+    });
+  }
+})();
+</script>
+</body>
+</html>
