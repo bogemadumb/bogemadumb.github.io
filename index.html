@@ -121,6 +121,14 @@
   .wbody p{margin:0 0 16px;color:var(--muted);font-size:1.03rem;line-height:1.55;max-width:48ch}
   .tags{display:flex;flex-wrap:wrap;gap:8px}
   .tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--muted);border:1px solid var(--line);padding:4px 10px;border-radius:999px}
+  .wname a{color:inherit;text-decoration:none;display:flex;align-items:center;gap:.5ch}
+  .wlinks{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+  .wlinks a{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    text-decoration:none;padding:7px 15px;border-radius:999px;border:1px solid var(--bold);
+    color:var(--bold);transition:background .25s,color .25s,border-color .25s}
+  .wlinks a:hover{background:var(--bold);color:var(--paper)}
+  .wlinks a.alt{border-color:var(--line);color:var(--faint)}
+  .wlinks a.alt:hover{background:var(--faint);color:var(--paper);border-color:var(--faint)}
   .soon{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--bold);margin-top:14px}
 
   .about{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(30px,5vw,64px);align-items:start}
@@ -188,6 +196,7 @@
     <div class="cta">
       <a class="btn btn-solid magnet" href="resume.pdf" download="Колосков Максим — резюме.pdf">Скачать резюме</a>
       <a class="btn btn-ghost magnet" href="#contact">Связаться <span>↓</span></a>
+      <a class="btn btn-ghost magnet" href="https://gitverse.ru/bogema_dumb" target="_blank" rel="noopener">GitVerse</a>
       <a class="btn btn-ghost magnet" href="https://github.com/bogemadumb" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
@@ -198,8 +207,8 @@
 
 <section class="stats" aria-label="Коротко о деле">
   <div class="wrap stats-grid">
-    <div class="stat rise"><div class="n">13</div><div class="l">проектов на&nbsp;GitHub</div></div>
-    <div class="stat rise"><div class="n">50<span>+</span></div><div class="l">студентов и&nbsp;заказчиков</div></div>
+    <div class="stat rise"><div class="n">25</div><div class="l">собственных проектов</div></div>
+    <div class="stat rise"><div class="n">50<span>+</span></div><div class="l">заказчиков за&nbsp;два года</div></div>
     <div class="stat rise"><div class="n">2022</div><div class="l">пишу код с</div></div>
     <div class="stat rise"><div class="n">24/7</div><div class="l">работает без&nbsp;меня</div></div>
   </div>
@@ -235,90 +244,206 @@
     <div class="wrap">
       <div class="sec-head rise"><span class="sec-idx">02</span><h2 class="sec-title">Основные работы</h2></div>
       <div class="works rise">
-        <a class="work" href="https://github.com/bogemadumb/tablegrab" target="_blank" rel="noopener">
-          <div class="wname">TableGrab <span class="arrow">↗</span></div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/meeting-assistant" target="_blank" rel="noopener">Ассистент встреч <span class="arrow">↗</span></a></div>
+          <div class="wbody">
+            <p>Записывает созвон, расшифровывает речь и размечает говорящих — целиком на компьютере, без облака. Захват экрана и звука через ScreenCaptureKit, распознавание на whisper.cpp с ускорением через Metal, подсказки во время разговора по своей базе документов с поиском BM25 по леммам. Около 12,7 тысячи строк на Swift.</p>
+            <div class="tags"><span class="tag">Swift</span><span class="tag">macOS</span><span class="tag">whisper.cpp</span><span class="tag">CoreML</span><span class="tag">Metal</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/meeting-assistant" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/meeting-assistant" target="_blank" rel="noopener">GitHub ↗</a></div>
+          </div>
+        </div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/multitool-macos" target="_blank" rel="noopener">Мультитул <span class="arrow">↗</span></a></div>
+          <div class="wbody">
+            <p>Одно приложение в строке меню macOS вместо десятка утилит: переключатель окон, история буфера, микшер звука, мониторинг, очистка диска, скриншоты. Около 90 модулей в 11 группах, каждый включается отдельно; примерно 104 тысячи строк Swift и 58 тысяч строк тестов.</p>
+            <div class="tags"><span class="tag">Swift</span><span class="tag">SwiftUI</span><span class="tag">AppKit</span><span class="tag">ScreenCaptureKit</span><span class="tag">SQLite</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/multitool-macos" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/multitool-macos" target="_blank" rel="noopener">GitHub ↗</a></div>
+          </div>
+        </div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/personal-crm-showcase" target="_blank" rel="noopener">Личная CRM <span class="arrow">↗</span></a></div>
+          <div class="wbody">
+            <p>CRM, которой пользуюсь каждый день: задачи и план дня, проекты с дорожными картами, заметки, календарь и «пульс» фоновых задач на трёх машинах. Витрина на вымышленных данных поднимается одной командой — API, SPA и MCP-сервер.</p>
+            <div class="tags"><span class="tag">FastAPI</span><span class="tag">PostgreSQL</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Docker Compose</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/personal-crm-showcase" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/personal-crm-showcase" target="_blank" rel="noopener">GitHub ↗</a></div>
+          </div>
+        </div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/spbgeu-app" target="_blank" rel="noopener">Студенческое приложение <span class="arrow">↗</span></a></div>
+          <div class="wbody">
+            <p>Неофициальное приложение для студентов вуза: расписание группы, сессии и преподавателя, дедлайны из Moodle, новости, лента с модерацией и мини-игры. Клиент на React Native для iOS, Android и веба, сервер на FastAPI, всё покрыто тестами.</p>
+            <div class="tags"><span class="tag">TypeScript</span><span class="tag">React Native</span><span class="tag">Expo</span><span class="tag">FastAPI</span><span class="tag">PostgreSQL</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/spbgeu-app" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/spbgeu-app" target="_blank" rel="noopener">GitHub ↗</a></div>
+          </div>
+        </div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/reels-engine" target="_blank" rel="noopener">reels-engine <span class="arrow">↗</span></a></div>
+          <div class="wbody">
+            <p>Движок вертикальных роликов, где всё рисует код: JSON-сценарий превращается в MP4 1080×1920 с обложкой, субтитрами и озвучкой. Выпуск — это данные, а не проект в видеоредакторе: серию можно держать в git и перерисовать после смены стиля.</p>
+            <div class="tags"><span class="tag">Node.js</span><span class="tag">Playwright</span><span class="tag">ffmpeg</span><span class="tag">TTS</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/reels-engine" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/reels-engine" target="_blank" rel="noopener">GitHub ↗</a></div>
+          </div>
+        </div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/yandex-games" target="_blank" rel="noopener">yandex-games <span class="arrow">↗</span></a></div>
+          <div class="wbody">
+            <p>Пять HTML5-игр на чистом JavaScript и Canvas, без движков: графика и звук генерируются кодом. Слой адаптеров собирает один исходник под Яндекс Игры, VK, GamePush и CrazyGames, а в Ball Sort 320 уровней, каждый проверен решателем.</p>
+            <div class="tags"><span class="tag">JavaScript</span><span class="tag">Canvas 2D</span><span class="tag">Web Audio</span><span class="tag">Node.js</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/yandex-games" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/yandex-games" target="_blank" rel="noopener">GitHub ↗</a><a href="https://bogemadumb.github.io/yandex-games/" target="_blank" rel="noopener">Играть ↗</a></div>
+          </div>
+        </div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/mood-news-grid" target="_blank" rel="noopener">Mood News Grid <span class="arrow">↗</span></a></div>
+          <div class="wbody">
+            <p>Настоящие новости из открытых лент в четырёх эмоциональных режимах. Факты при этом не меняются — это не обещание, а автоматическая проверка, которая блокирует публикацию.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">SQLite</span><span class="tag">LLM</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/mood-news-grid" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/mood-news-grid" target="_blank" rel="noopener">GitHub ↗</a><a href="https://bogemadumb.ru/mood/" target="_blank" rel="noopener">Демо ↗</a></div>
+          </div>
+        </div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/vpn-status-bar" target="_blank" rel="noopener">vpn-status-bar <span class="arrow">↗</span></a></div>
+          <div class="wbody">
+            <p>Менюбар-приложение для личного туннеля: жив ли он, где в цепочке Мак → роутер → провайдер → сервер → сайт растёт задержка, не утекает ли трафик мимо. Заодно управляет ключами своего сервера.</p>
+            <div class="tags"><span class="tag">Swift</span><span class="tag">SwiftUI</span><span class="tag">sing-box</span><span class="tag">xray</span><span class="tag">Python</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/vpn-status-bar" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/vpn-status-bar" target="_blank" rel="noopener">GitHub ↗</a></div>
+          </div>
+        </div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/infra-map" target="_blank" rel="noopener">infra-map <span class="arrow">↗</span></a></div>
+          <div class="wbody">
+            <p>Интерактивная карта инфраструктуры: машины — шары, внутри контуры и узлы — службы, таймеры, контейнеры, базы, боты; второй режим — граф связей в 2D и 3D. Оригинал строился по живой инвентаризации трёх машин, 440 узлов.</p>
+            <div class="tags"><span class="tag">JavaScript</span><span class="tag">three.js</span><span class="tag">force-graph</span><span class="tag">Python</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/infra-map" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/infra-map" target="_blank" rel="noopener">GitHub ↗</a></div>
+          </div>
+        </div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/claude-pocket" target="_blank" rel="noopener">claude-pocket <span class="arrow">↗</span></a></div>
+          <div class="wbody">
+            <p>Мобильный интерфейс к Claude Code внутри Telegram: агент работает на сервере в папке проекта, а телефон показывает поток его работы — размышления, вызовы инструментов, diff, план и запросы разрешений.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Claude Agent SDK</span><span class="tag">Telegram WebApp</span><span class="tag">nginx</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/claude-pocket" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/claude-pocket" target="_blank" rel="noopener">GitHub ↗</a></div>
+          </div>
+        </div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/dota-coach" target="_blank" rel="noopener">dota-coach <span class="arrow">↗</span></a></div>
+          <div class="wbody">
+            <p>Локальный ассистент для Dota 2: по ходу матча подсказывает голосом и на втором экране тайминги рун и стаков, что покупать дальше с учётом всех десяти героев и как играть против соперника.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">asyncio</span><span class="tag">Claude Agent SDK</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/dota-coach" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/dota-coach" target="_blank" rel="noopener">GitHub ↗</a></div>
+          </div>
+        </div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/nier-voice" target="_blank" rel="noopener">nier-voice <span class="arrow">↗</span></a></div>
+          <div class="wbody">
+            <p>Голосовой ввод для macOS: держишь клавишу и говоришь — слова появляются по ходу речи, отпустил — текст вставлен туда, где стоит курсор, в любом приложении. Потоковое распознавание и полировка текста.</p>
+            <div class="tags"><span class="tag">Swift</span><span class="tag">SwiftUI</span><span class="tag">WebSocket</span><span class="tag">Deepgram</span><span class="tag">Groq</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/nier-voice" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/nier-voice" target="_blank" rel="noopener">GitHub ↗</a></div>
+          </div>
+        </div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/tablegrab" target="_blank" rel="noopener">TableGrab <span class="arrow">↗</span></a></div>
           <div class="wbody">
             <p>Берёт таблицу с любой веб-страницы и кладёт в Excel, CSV или Google Sheets одним кликом. Расширение под Chrome на MV3 и веб-сервис на FastAPI делят общий движок разбора. Типизация честная — даты, ID и номера не портятся при переносе.</p>
             <div class="tags"><span class="tag">Chrome MV3</span><span class="tag">FastAPI</span><span class="tag">Python</span><span class="tag">парсинг данных</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/tablegrab" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/tablegrab" target="_blank" rel="noopener">GitHub ↗</a></div>
           </div>
-        </a>
-        <a class="work" href="https://github.com/bogemadumb/ccmonitor" target="_blank" rel="noopener">
-          <div class="wname">ccmonitor <span class="arrow">↗</span></div>
+        </div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/ccmonitor" target="_blank" rel="noopener">ccmonitor <span class="arrow">↗</span></a></div>
           <div class="wbody">
             <p>Менюбар-приложение под macOS: лимиты и расход видно прямо в строке меню. Интерфейс на Swift, данные тянет Python, само поднимается через LaunchAgent.</p>
             <div class="tags"><span class="tag">Swift</span><span class="tag">macOS</span><span class="tag">Python</span><span class="tag">LaunchAgent</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/ccmonitor" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/ccmonitor" target="_blank" rel="noopener">GitHub ↗</a></div>
           </div>
-        </a>
-        <a class="work" href="https://github.com/bogemadumb/habit-tracker" target="_blank" rel="noopener">
-          <div class="wname">habit-tracker <span class="arrow">↗</span></div>
+        </div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/habit-tracker" target="_blank" rel="noopener">habit-tracker <span class="arrow">↗</span></a></div>
           <div class="wbody">
             <p>Свой трекер привычек: Telegram Mini App на FastAPI, а базой служит обычная Google-таблица. Стрики, календарь-хитмэп, напоминания — отмечаешься и видишь прогресс, не выходя из телеги.</p>
             <div class="tags"><span class="tag">FastAPI</span><span class="tag">Telegram Mini App</span><span class="tag">TypeScript</span><span class="tag">Google Sheets API</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/habit-tracker" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/habit-tracker" target="_blank" rel="noopener">GitHub ↗</a></div>
           </div>
-        </a>
-        <a class="work" href="https://github.com/bogemadumb/news-digest" target="_blank" rel="noopener">
-          <div class="wname">news-digest <span class="arrow">↗</span></div>
+        </div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/news-digest" target="_blank" rel="noopener">news-digest <span class="arrow">↗</span></a></div>
           <div class="wbody">
             <p>Новостной бот: около 140 RSS-источников схлопываются в один дайджест без дублей и рекламы. Кластеризация ловит один и тот же сюжет, LLM-редактор причёсывает, рассылка идёт по расписанию.</p>
             <div class="tags"><span class="tag">Python</span><span class="tag">LLM</span><span class="tag">RSS</span><span class="tag">systemd</span><span class="tag">Telegram</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/news-digest" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/news-digest" target="_blank" rel="noopener">GitHub ↗</a></div>
           </div>
-        </a>
-        <a class="work" href="https://github.com/bogemadumb/moodle-monitor" target="_blank" rel="noopener">
-          <div class="wname">moodle-monitor <span class="arrow">↗</span></div>
+        </div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/moodle-monitor" target="_blank" rel="noopener">moodle-monitor <span class="arrow">↗</span></a></div>
           <div class="wbody">
             <p>Мониторит учебный портал Moodle: заходит через SSO, сравнивает снапшоты и пушит новые задания в Telegram. Заодно сам раскладывает скачанные файлы по папкам.</p>
             <div class="tags"><span class="tag">Python</span><span class="tag">скрапинг</span><span class="tag">SSO</span><span class="tag">cron</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/moodle-monitor" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/moodle-monitor" target="_blank" rel="noopener">GitHub ↗</a></div>
           </div>
-        </a>
-        <a class="work" href="https://github.com/bogemadumb/gmail-telegram-bot" target="_blank" rel="noopener">
-          <div class="wname">gmail-telegram-bot <span class="arrow">↗</span></div>
+        </div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/gmail-telegram-bot" target="_blank" rel="noopener">gmail-telegram-bot <span class="arrow">↗</span></a></div>
           <div class="wbody">
             <p>Двусторонний мост между Gmail и Telegram: письма падают прямо в чат, а ответить, архивировать или отписаться можно оттуда же. Коды и ссылки из писем достаются регулярками, мимо модели.</p>
             <div class="tags"><span class="tag">Python</span><span class="tag">IMAP/SMTP</span><span class="tag">Telegram</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/gmail-telegram-bot" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/gmail-telegram-bot" target="_blank" rel="noopener">GitHub ↗</a></div>
           </div>
-        </a>
-        <a class="work" href="https://github.com/bogemadumb/tg-style-autoresponder" target="_blank" rel="noopener">
-          <div class="wname">tg-style-autoresponder <span class="arrow">↗</span></div>
+        </div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/tg-style-autoresponder" target="_blank" rel="noopener">tg-style-autoresponder <span class="arrow">↗</span></a></div>
           <div class="wbody">
             <p>Бот, который отвечает в личке твоим же стилем через Telegram Business API. Сам решает, где ответить, а где спросить тебя, и подтягивает твои же правки.</p>
             <div class="tags"><span class="tag">Python</span><span class="tag">Telegram Business API</span><span class="tag">LLM</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/tg-style-autoresponder" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/tg-style-autoresponder" target="_blank" rel="noopener">GitHub ↗</a></div>
           </div>
-        </a>
-        <a class="work" href="https://github.com/bogemadumb/presentation-designer" target="_blank" rel="noopener">
-          <div class="wname">presentation-designer <span class="arrow">↗</span></div>
+        </div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/presentation-designer" target="_blank" rel="noopener">presentation-designer <span class="arrow">↗</span></a></div>
           <div class="wbody">
             <p>Делаю презентации кодом: из брифа собирается компоновка слайдов, на выходе PDF или редактируемый .pptx. Не шаблон из готовых макетов, а свой дизайн под тему.</p>
             <div class="tags"><span class="tag">Python</span><span class="tag">HTML/CSS</span><span class="tag">pptx</span><span class="tag">дизайн</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/presentation-designer" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/presentation-designer" target="_blank" rel="noopener">GitHub ↗</a></div>
           </div>
-        </a>
-        <a class="work" href="https://github.com/bogemadumb/gost-docx" target="_blank" rel="noopener">
-          <div class="wname">gost-docx <span class="arrow">↗</span></div>
+        </div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/gost-docx" target="_blank" rel="noopener">gost-docx <span class="arrow">↗</span></a></div>
           <div class="wbody">
             <p>Движок, который собирает документ из Markdown в docx или pdf по ГОСТу. Сам делает содержание и проставляет реальные номера страниц, а не заглушки.</p>
             <div class="tags"><span class="tag">Python</span><span class="tag">docx</span><span class="tag">pdf</span><span class="tag">ГОСТ</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/gost-docx" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/gost-docx" target="_blank" rel="noopener">GitHub ↗</a></div>
           </div>
-        </a>
-        <a class="work" href="https://github.com/bogemadumb/ru-stats" target="_blank" rel="noopener">
-          <div class="wname">ru-stats <span class="arrow">↗</span></div>
+        </div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/ru-stats" target="_blank" rel="noopener">ru-stats <span class="arrow">↗</span></a></div>
           <div class="wbody">
             <p>Тащит госстатистику — Росстат, ЕМИСС, ЦБ — и отдаёт готовой таблицей со ссылкой на источник. Удобно для учебных и аналитических работ.</p>
             <div class="tags"><span class="tag">Python</span><span class="tag">госстатистика</span><span class="tag">данные</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/ru-stats" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/ru-stats" target="_blank" rel="noopener">GitHub ↗</a></div>
           </div>
-        </a>
-        <a class="work" href="https://github.com/bogemadumb/sphere-analysis" target="_blank" rel="noopener">
-          <div class="wname">sphere-analysis <span class="arrow">↗</span></div>
+        </div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/sphere-analysis" target="_blank" rel="noopener">sphere-analysis <span class="arrow">↗</span></a></div>
           <div class="wbody">
             <p>Разбор ниши или бизнес-идеи панелью из шести ролей — практик, финансист, скептик и другие. На выходе честная структура и минусы, а не хвалебный текст.</p>
             <div class="tags"><span class="tag">LLM</span><span class="tag">мульти-агент</span><span class="tag">аналитика</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/sphere-analysis" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/sphere-analysis" target="_blank" rel="noopener">GitHub ↗</a></div>
           </div>
-        </a>
-        <a class="work" href="https://github.com/bogemadumb/video-vision" target="_blank" rel="noopener">
-          <div class="wname">video-vision <span class="arrow">↗</span></div>
+        </div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/video-vision" target="_blank" rel="noopener">video-vision <span class="arrow">↗</span></a></div>
           <div class="wbody">
             <p>«Зрение» по видео: кадры через ffmpeg плюс локальная транскрипция — можно понять, что происходит в ролике, без ручного пересмотра. Всё локально, без облака.</p>
             <div class="tags"><span class="tag">ffmpeg</span><span class="tag">whisper</span><span class="tag">локально</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/video-vision" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/video-vision" target="_blank" rel="noopener">GitHub ↗</a></div>
           </div>
-        </a>
+        </div>
+        <div class="work">
+          <div class="wname"><a href="https://gitverse.ru/bogema_dumb/video-edit" target="_blank" rel="noopener">video-edit <span class="arrow">↗</span></a></div>
+          <div class="wbody">
+            <p>Монтаж видео через ffmpeg одной командой: обрезка, склейка, субтитры, вертикаль 9:16, музыка, сжатие. Скилл для Claude Code, всё работает локально.</p>
+            <div class="tags"><span class="tag">ffmpeg</span><span class="tag">Claude Code</span><span class="tag">локально</span></div>
+            <div class="wlinks"><a href="https://gitverse.ru/bogema_dumb/video-edit" target="_blank" rel="noopener">GitVerse ↗</a><a class="alt" href="https://github.com/bogemadumb/video-edit" target="_blank" rel="noopener">GitHub ↗</a></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -330,7 +455,7 @@
         <div class="rise">
           <p>В код пришёл не с курсов. В какой-то момент надоело делать одно и то же руками — оказалось, проще написать скрипт. Так и втянулся: сначала боты и парсеры, потом сайты и веб-приложения — с вёрсткой, базами данных и дизайном, — а там добрался и до нативного приложения под мак.</p>
           <p>Делаю штуки под свои задачи — и они реально работают, а не пылятся в репозитории. Одно следит за учёбой, другое схлопывает новости в дайджест, третье держит мои привычки. Что подвернётся новое — разбираюсь и делаю.</p>
-          <p>Второй трек — менеджмент. Учусь на менеджера проектов в СПбГЭУ и с 2023-го веду проектный консалтинг: бизнес-планы, финмодели, аналитика, проектные и учебные работы — больше пятидесяти студентов и заказчиков, часто с повторными обращениями. Запускал образовательное Telegram-медиа и довёл его с нуля до 1500 подписчиков. <strong>Это про надёжность и умение разобраться в чужой теме с нуля.</strong></p>
+          <p>Второй трек — менеджмент. Учусь на менеджера проектов в СПбГЭУ, четвёртый курс. С 2024-го беру заказы: финмодели, аналитика, проектная документация — больше пятидесяти заказчиков, и большинство возвращается снова. Летом 2026 прошёл практику в рекламном агентстве Traffic by Okkam: разбирал документооборот и отчётность, считал показатели компании за пять лет, искал узкие места в процессах. <strong>Это про надёжность и умение разобраться в чужой теме с нуля.</strong></p>
         </div>
         <div class="rise">
           <p class="quote">«Хорошо сделано — это когда работает само и к нему не приходится возвращаться.»<span class="attr">— Максим Колосков</span></p>
@@ -346,6 +471,7 @@
       <div class="c-list rise">
         <a href="https://t.me/bogema_dumb" target="_blank" rel="noopener"><span class="k">Telegram</span><span class="v">@bogema_dumb</span></a>
         <a href="mailto:milistane@gmail.com"><span class="k">Почта</span><span class="v">milistane@gmail.com</span></a>
+        <a href="https://gitverse.ru/bogema_dumb" target="_blank" rel="noopener"><span class="k">GitVerse</span><span class="v">gitverse.ru/bogema_dumb</span></a>
         <a href="https://github.com/bogemadumb" target="_blank" rel="noopener"><span class="k">GitHub</span><span class="v">github.com/bogemadumb</span></a>
       </div>
     </div>
@@ -354,7 +480,7 @@
   <div class="wrap">
     <footer>
       <span>Максим Колосков · Санкт-Петербург</span>
-      <span>@bogema_dumb · milistane@gmail.com · github.com/bogemadumb</span>
+      <span>@bogema_dumb · milistane@gmail.com · gitverse.ru/bogema_dumb · github.com/bogemadumb</span>
     </footer>
   </div>
 </main>
